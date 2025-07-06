@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import './Profile.css';
 
 const API_BASE_URL = 'http://localhost:5000';
 
 const UserProfile = () => {
+  const { t } = useTranslation();
+
   const { token, user, updateUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -195,7 +198,7 @@ const UserProfile = () => {
     return (
       <div className="user-profile-page">
         <div className="error-container">
-          <h2>Erreur</h2>
+          <h2>{t('common.error')}</h2>
           <p>{error}</p>
           <button onClick={loadUserData} className="btn btn-primary">
             Réessayer
@@ -227,11 +230,11 @@ const UserProfile = () => {
 
         {/* Informations personnelles */}
         <div className="profile-section">
-          <h2>Informations personnelles</h2>
+          <h2>{t('user.personalInfo')}</h2>
           
           <div className="form-row">
             <div className="form-group">
-              <label>Prénom</label>
+              <label>{t('auth.firstName')}</label>
               <div className="editable-field">
                 {editing.firstName ? (
                   <div className="edit-mode">
@@ -273,7 +276,7 @@ const UserProfile = () => {
             </div>
 
             <div className="form-group">
-              <label>Nom</label>
+              <label>{t('auth.lastName')}</label>
               <div className="editable-field">
                 {editing.lastName ? (
                   <div className="edit-mode">
@@ -316,7 +319,7 @@ const UserProfile = () => {
           </div>
 
           <div className="form-group">
-            <label>Email</label>
+            <label>{t('auth.email')}</label>
             <div className="editable-field">
               {editing.email ? (
                 <div className="edit-mode">
@@ -358,7 +361,7 @@ const UserProfile = () => {
           </div>
 
           <div className="form-group">
-            <label>Téléphone</label>
+            <label>{t('restaurant.phone')}</label>
             <div className="editable-field">
               {editing.phone ? (
                 <div className="edit-mode">
@@ -402,7 +405,7 @@ const UserProfile = () => {
 
         {/* Adresse */}
         <div className="profile-section">
-          <h2>Adresse de livraison</h2>
+          <h2>{t('order.deliveryAddress')}</h2>
           
           <div className="form-group">
             <label>Rue</label>
@@ -535,10 +538,10 @@ const UserProfile = () => {
 
         {/* Préférences */}
         <div className="profile-section">
-          <h2>Préférences</h2>
+          <h2>{t('user.preferences')}</h2>
           
           <div className="form-group">
-            <label>Notifications</label>
+            <label>{t('user.notifications')}</label>
             <div className="editable-field">
               {editing['preferences.notifications'] ? (
                 <div className="edit-mode">
@@ -632,7 +635,7 @@ const UserProfile = () => {
           </div>
 
           <div className="form-group">
-            <label>Langue</label>
+            <label>{t('common.language')}</label>
             <div className="editable-field">
               {editing['preferences.language'] ? (
                 <div className="edit-mode">

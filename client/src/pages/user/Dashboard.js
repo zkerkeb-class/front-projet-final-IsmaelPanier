@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import RestaurantModal from '../../components/common/RestaurantModal';
@@ -7,6 +8,8 @@ import './Dashboard.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const UserDashboard = () => {
+  const { t } = useTranslation();
+
   const { user, token } = useAuth();
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
@@ -174,7 +177,7 @@ const UserDashboard = () => {
           <section className="filters-section">
             <div className="filters-container">
               <div className="filter-group">
-                <label className="filter-label">Cuisine</label>
+                <label className="filter-label">{t('restaurant.cuisine')}</label>
                 <select
                   value={selectedCuisine}
                   onChange={(e) => setSelectedCuisine(e.target.value)}
@@ -206,9 +209,9 @@ const UserDashboard = () => {
                   onChange={(e) => setSortBy(e.target.value)}
                   className="uber-input filter-select"
                 >
-                  <option value="name">Nom</option>
-                  <option value="rating">Note</option>
-                  <option value="deliveryTime">Temps de livraison</option>
+                  <option value="name">{t('auth.lastName')}</option>
+                  <option value="rating">{t('restaurant.rating')}</option>
+                  <option value="deliveryTime">{t('restaurant.deliveryTime')}</option>
                 </select>
               </div>
             </div>
@@ -250,7 +253,7 @@ const UserDashboard = () => {
                         </div>
                       )}
                       <div className={`restaurant-status-badge ${restaurant.isOpen !== false ? 'restaurant-status-open' : 'restaurant-status-closed'}`}>
-                        {restaurant.isOpen !== false ? 'Ouvert' : 'Fermé'}
+                        {restaurant.isOpen !== false ? t('restaurant.open') : t('restaurant.closed')}
                       </div>
                     </div>
                     

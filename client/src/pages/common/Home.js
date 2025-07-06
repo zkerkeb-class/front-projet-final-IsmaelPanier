@@ -1,9 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Home.css';
 
 const Home = () => {
+  const { t } = useTranslation();
+
   const { isAuthenticated } = useAuth();
 
   return (

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './About.css';
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="about-page">
       {/* Hero Section */}

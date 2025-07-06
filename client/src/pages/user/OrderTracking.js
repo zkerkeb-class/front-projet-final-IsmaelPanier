@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './OrderTracking.css';
@@ -6,6 +7,8 @@ import './OrderTracking.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const OrderTracking = () => {
+  const { t } = useTranslation();
+
   const { orderId } = useParams();
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -61,8 +64,8 @@ const OrderTracking = () => {
 
     const simulateDeliverySteps = (totalTime) => {
       const steps = [
-        { status: 'preparing', time: 0, location: 'Restaurant', message: 'Votre commande est en préparation' },
-        { status: 'ready', time: totalTime * 0.3, location: 'Restaurant', message: 'Votre commande est prête' },
+        { status: 'preparing', time: 0, location: t('restaurant.restaurant'), message: 'Votre commande est en préparation' },
+        { status: 'ready', time: totalTime * 0.3, location: t('restaurant.restaurant'), message: 'Votre commande est prête' },
         { status: 'picked_up', time: totalTime * 0.4, location: 'En route', message: 'Le livreur a récupéré votre commande' },
         { status: 'delivered', time: totalTime, location: 'Chez vous', message: 'Votre commande a été livrée' }
       ];
@@ -94,7 +97,7 @@ const OrderTracking = () => {
         rating: randomDriver.rating,
         estimatedTime,
         currentStatus: 'preparing',
-        location: 'Restaurant',
+        location: t('restaurant.restaurant'),
         isSimulated: true
       });
 
@@ -216,7 +219,7 @@ const OrderTracking = () => {
               Passée le {formatDate(order.createdAt)}
             </p>
             <div className="order-restaurant">
-              <h3>{order.restaurant?.name || 'Restaurant'}</h3>
+              <h3>{order.restaurant?.name || t('restaurant.restaurant')}</h3>
               <p>{order.restaurant?.address || 'Adresse du restaurant'}</p>
             </div>
           </div>
@@ -341,7 +344,7 @@ const OrderTracking = () => {
           </div>
 
           <div className="delivery-info">
-            <h4>Adresse de livraison</h4>
+            <h4>{t('order.deliveryAddress')}</h4>
             <p>{order.deliveryAddress}</p>
             {order.specialInstructions && (
               <>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
@@ -14,6 +15,8 @@ const API_BASE_URL = 'http://localhost:5000';
 console.log('🏪 Dashboard Restaurant - Connexion API:', API_BASE_URL);
 
 const RestaurantDashboard = () => {
+  const { t } = useTranslation();
+
   const { user, token } = useAuth();
   const navigate = useNavigate();
   const [selectedPeriod, setSelectedPeriod] = useState('7days');
@@ -315,7 +318,7 @@ const RestaurantDashboard = () => {
               >
                 <div className="quick-action-icon">⚙️</div>
                 <div className="quick-action-content">
-                  <h3>Paramètres</h3>
+                  <h3>{t('common.settings')}</h3>
                   <p>Configurer votre restaurant</p>
                 </div>
               </button>
@@ -338,7 +341,7 @@ const RestaurantDashboard = () => {
               <div className="stat-card">
                 <div className="stat-icon">📦</div>
                 <div className="stat-content">
-                  <h3>Commandes</h3>
+                  <h3>{t('order.orders')}</h3>
                   <p className="stat-value">{stats.orders}</p>
                   <span className="stat-trend positive">+8.3%</span>
                 </div>
@@ -397,7 +400,7 @@ const RestaurantDashboard = () => {
                   <Tooltip 
                     formatter={(value, name) => [
                       name === 'ventes' ? `${value}€` : value,
-                      name === 'ventes' ? 'Ventes' : 'Commandes'
+                      name === 'ventes' ? 'Ventes' : t('order.orders')
                     ]}
                   />
                   <Legend />
@@ -449,7 +452,7 @@ const RestaurantDashboard = () => {
                     <Tooltip 
                       formatter={(value, name) => [
                         name === 'ventes' ? `${value}€` : value,
-                        name === 'ventes' ? 'Ventes' : 'Commandes'
+                        name === 'ventes' ? 'Ventes' : t('order.orders')
                       ]}
                     />
                     <Legend />
@@ -519,7 +522,7 @@ const RestaurantDashboard = () => {
               <div className="detail-item">
                 <div className="detail-icon">🏠</div>
                 <div className="detail-content">
-                  <h3>Adresse</h3>
+                  <h3>{t('restaurant.address')}</h3>
                   {restaurantData?.address ? (
                     <p>
                       {restaurantData.address.street || 'Adresse à définir'}, {restaurantData.address.city || 'Ville à définir'}, 
@@ -533,7 +536,7 @@ const RestaurantDashboard = () => {
               <div className="detail-item">
                 <div className="detail-icon">📞</div>
                 <div className="detail-content">
-                  <h3>Téléphone</h3>
+                  <h3>{t('restaurant.phone')}</h3>
                   <p>{restaurantData?.phone || <span className="missing-data">Téléphone non configuré. <Link to="/restaurant/profile" className="config-link">Configurer maintenant</Link></span>}</p>
                 </div>
               </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './OrderManagement.css';
@@ -7,6 +8,8 @@ import './OrderManagement.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const OrderManagement = () => {
+  const { t } = useTranslation();
+
   const { token } = useAuth();
   const [orders, setOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
@@ -219,10 +222,10 @@ const OrderManagement = () => {
         <div className="sidebar">
           <h3>Menu Restaurant</h3>
           <ul className="sidebar-menu">
-            <li><Link to="/restaurant/dashboard">Dashboard</Link></li>
+            <li><Link to="/restaurant/dashboard">{t('navigation.dashboard')}</Link></li>
             <li><Link to="/restaurant/dishes">Mes Plats</Link></li>
-            <li><Link to="/restaurant/orders" className="active">Commandes</Link></li>
-            <li><Link to="/restaurant/profile">Profil</Link></li>
+            <li><Link to="/restaurant/orders" className="active">{t('order.orders')}</Link></li>
+            <li><Link to="/restaurant/profile">{t('navigation.profile')}</Link></li>
           </ul>
         </div>
         <div className="content-area">
@@ -237,10 +240,10 @@ const OrderManagement = () => {
       <div className="sidebar">
         <h3>Menu Restaurant</h3>
         <ul className="sidebar-menu">
-          <li><Link to="/restaurant/dashboard">Dashboard</Link></li>
+          <li><Link to="/restaurant/dashboard">{t('navigation.dashboard')}</Link></li>
           <li><Link to="/restaurant/dishes">Mes Plats</Link></li>
-          <li><Link to="/restaurant/orders" className="active">Commandes</Link></li>
-          <li><Link to="/restaurant/profile">Profil</Link></li>
+          <li><Link to="/restaurant/orders" className="active">{t('order.orders')}</Link></li>
+          <li><Link to="/restaurant/profile">{t('navigation.profile')}</Link></li>
         </ul>
       </div>
 
@@ -404,7 +407,7 @@ const OrderManagement = () => {
 
         {activeTab === 'history' && (
           <div className="history-section">
-            <h2>Historique des commandes</h2>
+            <h2>{t('order.orderHistory')}</h2>
             <div className="orders-table">
               <table>
                 <thead>
@@ -412,7 +415,7 @@ const OrderManagement = () => {
                     <th>N° Commande</th>
                     <th>Client</th>
                     <th>Date</th>
-                    <th>Total</th>
+                    <th>{t('cart.total')}</th>
                     <th>Statut</th>
                     <th>Actions</th>
                   </tr>

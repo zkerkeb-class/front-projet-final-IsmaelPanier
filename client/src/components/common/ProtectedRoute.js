@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
@@ -10,7 +11,7 @@ const ProtectedRoute = ({ children, requiredRole = null }) => {
   if (loading) {
     return (
       <div className="loading-container">
-        <div className="loading-spinner">Chargement...</div>
+        <div className="loading-spinner">{t('common.loading')}</div>
       </div>
     );
   }

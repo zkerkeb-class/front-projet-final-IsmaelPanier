@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import './RestaurantModal.css';
 
@@ -11,6 +12,8 @@ const RestaurantModal = ({ restaurant, isOpen, onClose }) => {
   const toggleFavorite = () => setIsFavorite(!isFavorite);
 
   const handleViewMenu = () => {
+  const { t } = useTranslation();
+
     navigate(`/user/restaurant/${restaurant._id}`);
     onClose();
   };
@@ -33,7 +36,7 @@ const RestaurantModal = ({ restaurant, isOpen, onClose }) => {
           
           {/* Status badge */}
           <div className={`restaurant-status-badge ${restaurant.isOpen !== false ? 'restaurant-status-open' : 'restaurant-status-closed'}`}>
-            {restaurant.isOpen !== false ? 'Ouvert' : 'Fermé'}
+            {restaurant.isOpen !== false ? t('restaurant.open') : t('restaurant.closed')}
           </div>
           
           {/* Boutons header */}

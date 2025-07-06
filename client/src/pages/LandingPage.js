@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './LandingPage.css';
 
 const LandingPage = () => {
+  const { t } = useTranslation();
+
   const [searchLocation, setSearchLocation] = useState('');
 
   const popularCategories = [
@@ -112,7 +115,7 @@ const LandingPage = () => {
               <div className="hero-stats">
                 <div className="stat">
                   <div className="stat-number">1000+</div>
-                  <div className="stat-label">Restaurants</div>
+                  <div className="stat-label">{t('restaurant.restaurants')}</div>
                 </div>
                 <div className="stat">
                   <div className="stat-number">50k+</div>

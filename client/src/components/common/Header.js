@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import ThemeToggle from './ThemeToggle';
+import LanguageSelector from './LanguageSelector';
 import './Header.css';
 
 const Header = () => {
+  const { t } = useTranslation();
   const { logout, isAuthenticated, isRestaurant, isUser, user } = useAuth();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
@@ -77,12 +80,12 @@ const Header = () => {
   };
 
   const getDisplayName = () => {
-    if (!user) return 'Compte';
+    if (!user) return t('common.profile');
     if (user.name) {
       const nameParts = user.name.split(' ');
-      return nameParts[0] || 'Compte';
+      return nameParts[0] || t('common.profile');
     }
-    return user.email ? user.email.split('@')[0] : 'Compte';
+    return user.email ? user.email.split('@')[0] : t('common.profile');
   };
 
   const handleCartClick = () => {
@@ -105,20 +108,23 @@ const Header = () => {
         <nav className="nav-desktop">
           <Link to="/" className="nav-link">
             <span className="material-icons">home</span>
-            Accueil
+            {t('navigation.home')}
           </Link>
           <Link to="/about" className="nav-link">
             <span className="material-icons">info</span>
-            À propos
+            {t('navigation.about')}
           </Link>
           <Link to="/contact" className="nav-link">
             <span className="material-icons">contact_mail</span>
-            Contact
+            {t('navigation.contact')}
           </Link>
         </nav>
 
         {/* Actions */}
         <div className="header-actions">
+          {/* Sélecteur de langue */}
+          <LanguageSelector />
+          
           {/* Thème */}
           <ThemeToggle />
 
@@ -127,7 +133,7 @@ const Header = () => {
             <button 
               className="cart-button"
               onClick={handleCartClick}
-              title="Voir le panier"
+              title={t('cart.cart')}
             >
               <span className="material-icons">shopping_cart</span>
               {cartCount > 0 && (
@@ -153,23 +159,23 @@ const Header = () => {
                     <>
                       <Link to="/user/dashboard" className="dropdown-item">
                         <span className="material-icons">dashboard</span>
-                        Dashboard
+                        {t('navigation.dashboard')}
                       </Link>
                       <Link to="/user/restaurants" className="dropdown-item">
                         <span className="material-icons">restaurant</span>
-                        Restaurants
+                        {t('restaurant.restaurants')}
                       </Link>
                       <Link to="/user/orders" className="dropdown-item">
                         <span className="material-icons">receipt_long</span>
-                        Mes Commandes
+                        {t('order.orders')}
                       </Link>
                       <Link to="/user/favorites" className="dropdown-item">
                         <span className="material-icons">favorite</span>
-                        Favoris
+                        {t('user.favorites')}
                       </Link>
                       <Link to="/user/profile" className="dropdown-item">
                         <span className="material-icons">person</span>
-                        Profil
+                        {t('navigation.profile')}
                       </Link>
                     </>
                   )}
@@ -178,19 +184,19 @@ const Header = () => {
                     <>
                       <Link to="/restaurant/dashboard" className="dropdown-item">
                         <span className="material-icons">analytics</span>
-                        Dashboard
+                        {t('navigation.dashboard')}
                       </Link>
                       <Link to="/restaurant/dishes" className="dropdown-item">
                         <span className="material-icons">restaurant_menu</span>
-                        Mes Plats
+                        {t('restaurant.dishes')}
                       </Link>
                       <Link to="/restaurant/orders" className="dropdown-item">
                         <span className="material-icons">inventory</span>
-                        Commandes
+                        {t('order.orders')}
                       </Link>
                       <Link to="/restaurant/profile" className="dropdown-item">
                         <span className="material-icons">store</span>
-                        Mon Restaurant
+                        {t('restaurant.restaurant')}
                       </Link>
                     </>
                   )}
@@ -199,7 +205,7 @@ const Header = () => {
                   
                   <button onClick={handleLogout} className="dropdown-item logout">
                     <span className="material-icons">logout</span>
-                    Déconnexion
+                    {t('navigation.logout')}
                   </button>
                 </div>
               )}
@@ -209,11 +215,11 @@ const Header = () => {
             <div className="auth-buttons">
               <Link to="/login" className="btn btn-outline">
                 <span className="material-icons">login</span>
-                Connexion
+                {t('auth.login')}
               </Link>
               <Link to="/register" className="btn btn-primary">
                 <span className="material-icons">person_add</span>
-                Inscription
+                {t('auth.register')}
               </Link>
             </div>
           )}
@@ -233,15 +239,15 @@ const Header = () => {
           <nav className="nav-mobile">
             <Link to="/" className="mobile-link" onClick={() => setShowMenu(false)}>
               <span className="material-icons">home</span>
-              Accueil
+              {t('navigation.home')}
             </Link>
             <Link to="/about" className="mobile-link" onClick={() => setShowMenu(false)}>
               <span className="material-icons">info</span>
-              À propos
+              {t('navigation.about')}
             </Link>
             <Link to="/contact" className="mobile-link" onClick={() => setShowMenu(false)}>
               <span className="material-icons">contact_mail</span>
-              Contact
+              {t('navigation.contact')}
             </Link>
             
             {!isAuthenticated && (
@@ -249,11 +255,11 @@ const Header = () => {
                 <div className="mobile-divider"></div>
                 <Link to="/login" className="mobile-link" onClick={() => setShowMenu(false)}>
                   <span className="material-icons">login</span>
-                  Connexion
+                  {t('auth.login')}
                 </Link>
                 <Link to="/register" className="mobile-link" onClick={() => setShowMenu(false)}>
                   <span className="material-icons">person_add</span>
-                  Inscription
+                  {t('auth.register')}
                 </Link>
               </>
             )}

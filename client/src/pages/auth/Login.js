@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 
 const Login = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -43,7 +45,7 @@ const Login = () => {
         setError(result.error);
       }
     } catch (err) {
-      setError('Une erreur est survenue lors de la connexion');
+      setError(t('auth.loginError'));
     } finally {
       setLoading(false);
     }
@@ -53,8 +55,8 @@ const Login = () => {
     <div className="auth-page">
       <div className="form-container">
         <div className="login-form">
-          <h2>Connexion</h2>
-          <p>Connectez-vous à votre compte</p>
+          <h2>{t('auth.loginTitle')}</h2>
+          <p>{t('auth.loginTitle')}</p>
         </div>
 
         {error && (
@@ -68,7 +70,7 @@ const Login = () => {
           <div className="form-group">
             <label htmlFor="email" className="form-label">
               <span className="material-icons">email</span>
-              Email
+              {t('auth.email')}
             </label>
             <input
               type="email"
@@ -85,7 +87,7 @@ const Login = () => {
           <div className="form-group">
             <label htmlFor="password" className="form-label">
               <span className="material-icons">lock</span>
-              Mot de passe
+              {t('auth.password')}
             </label>
             <input
               type="password"
@@ -94,7 +96,7 @@ const Login = () => {
               className="form-input"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Votre mot de passe"
+              placeholder={t('auth.password')}
               required
             />
           </div>
@@ -105,21 +107,21 @@ const Login = () => {
             disabled={loading}
             style={{ width: '100%' }}
           >
-            {loading ? 'Connexion...' : 'Se connecter'}
+            {loading ? t('common.loading') : t('auth.loginButton')}
           </button>
         </form>
 
         <div className="form-footer">
           <p>
-            Pas encore de compte ?{' '}
+            {t('auth.dontHaveAccount')}{' '}
             <Link to="/register" className="link">
-              S'inscrire
+              {t('auth.register')}
             </Link>
           </p>
           <p>
             <Link to="/" className="link">
               <span className="material-icons">arrow_back</span>
-              Retour à l'accueil
+              {t('common.back')} {t('navigation.home')}
             </Link>
           </p>
         </div>

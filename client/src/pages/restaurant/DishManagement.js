@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import DishModal from '../../components/common/DishModal';
 import './DishManagement.css';
@@ -6,6 +7,8 @@ import './DishManagement.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const DishManagement = () => {
+  const { t } = useTranslation();
+
   const { user, token } = useAuth();
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -472,14 +475,14 @@ const DishManagement = () => {
                         <button 
                           onClick={() => handleEditDish(dish)}
                           className="action-btn edit-btn"
-                          title="Modifier"
+                          title=t('common.edit')
                         >
                           ✏️
                         </button>
                         <button 
                           onClick={() => handleDeleteDish(dish._id)}
                           className="action-btn delete-btn"
-                          title="Supprimer"
+                          title=t('common.delete')
                         >
                           🗑️
                         </button>

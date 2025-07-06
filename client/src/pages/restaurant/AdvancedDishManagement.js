@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './AdvancedDishManagement.css';
@@ -6,6 +7,8 @@ import './AdvancedDishManagement.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const AdvancedDishManagement = () => {
+  const { t } = useTranslation();
+
   const { token } = useAuth();
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -338,14 +341,14 @@ const AdvancedDishManagement = () => {
         <div className="sidebar">
           <h3>Menu Restaurant</h3>
           <ul className="sidebar-menu">
-            <li><Link to="/restaurant/dashboard">Dashboard</Link></li>
+            <li><Link to="/restaurant/dashboard">{t('navigation.dashboard')}</Link></li>
             <li><Link to="/restaurant/dishes">Mes Plats</Link></li>
-            <li><Link to="/restaurant/orders">Commandes</Link></li>
-            <li><Link to="/restaurant/profile">Profil</Link></li>
+            <li><Link to="/restaurant/orders">{t('order.orders')}</Link></li>
+            <li><Link to="/restaurant/profile">{t('navigation.profile')}</Link></li>
           </ul>
         </div>
         <div className="content-area">
-          <p>Chargement...</p>
+          <p>{t('common.loading')}</p>
         </div>
       </div>
     );
@@ -356,10 +359,10 @@ const AdvancedDishManagement = () => {
       <div className="sidebar">
         <h3>Menu Restaurant</h3>
         <ul className="sidebar-menu">
-          <li><Link to="/restaurant/dashboard">Dashboard</Link></li>
+          <li><Link to="/restaurant/dashboard">{t('navigation.dashboard')}</Link></li>
           <li><Link to="/restaurant/dishes">Mes Plats</Link></li>
-          <li><Link to="/restaurant/orders">Commandes</Link></li>
-          <li><Link to="/restaurant/profile">Profil</Link></li>
+          <li><Link to="/restaurant/orders">{t('order.orders')}</Link></li>
+          <li><Link to="/restaurant/profile">{t('navigation.profile')}</Link></li>
         </ul>
       </div>
 
@@ -451,7 +454,7 @@ const AdvancedDishManagement = () => {
                     </div>
                     
                     <div className="form-group">
-                      <label>Catégorie</label>
+                      <label>{t('restaurant.category')}</label>
                       <select
                         value={formData.category}
                         onChange={(e) => setFormData({...formData, category: e.target.value})}
@@ -487,7 +490,7 @@ const AdvancedDishManagement = () => {
                   </div>
 
                   <div className="form-group full-width">
-                    <label>Description</label>
+                    <label>{t('restaurant.description')}</label>
                     <textarea
                       value={formData.description}
                       onChange={(e) => setFormData({...formData, description: e.target.value})}
@@ -548,13 +551,13 @@ const AdvancedDishManagement = () => {
                       <input
                         type="number"
                         step="0.01"
-                        placeholder="Prix"
+                        placeholder=t('restaurant.price')
                         value={option.price}
                         onChange={(e) => updatePriceOption(index, 'price', parseFloat(e.target.value))}
                       />
                       <input
                         type="text"
-                        placeholder="Description"
+                        placeholder=t('restaurant.description')
                         value={option.description}
                         onChange={(e) => updatePriceOption(index, 'description', e.target.value)}
                       />
@@ -795,13 +798,13 @@ const AdvancedDishManagement = () => {
                       <input
                         type="number"
                         step="0.01"
-                        placeholder="Prix"
+                        placeholder=t('restaurant.price')
                         value={addon.price}
                         onChange={(e) => updateAddOn(index, 'price', parseFloat(e.target.value))}
                       />
                       <input
                         type="text"
-                        placeholder="Description"
+                        placeholder=t('restaurant.description')
                         value={addon.description}
                         onChange={(e) => updateAddOn(index, 'description', e.target.value)}
                       />

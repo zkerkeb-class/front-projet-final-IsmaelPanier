@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './NavigationGuide.css';
 
 const NavigationGuide = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="navigation-guide">
       <div className="guide-container">

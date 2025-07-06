@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './DishModal.css';
 
 const DishModal = ({ isOpen, onClose, onSave, dish, isEdit = false }) => {
@@ -82,6 +83,8 @@ const DishModal = ({ isOpen, onClose, onSave, dish, isEdit = false }) => {
   };
 
   const addIngredient = () => {
+  const { t } = useTranslation();
+
     const trimmed = currentIngredient.trim();
     if (
       trimmed &&
@@ -276,7 +279,7 @@ const DishModal = ({ isOpen, onClose, onSave, dish, isEdit = false }) => {
 
             {/* Ingredients */}
             <div className="form-section">
-              <h3 className="section-title">Ingrédients</h3>
+              <h3 className="section-title">{t('restaurant.ingredients')}</h3>
               
               <div className="ingredient-input">
                 <input

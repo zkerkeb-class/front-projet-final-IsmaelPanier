@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import './Register.css';
 
 const Register = () => {
+  const { t } = useTranslation();
   const [step, setStep] = useState('select'); // 'select' ou 'form'
   const [selectedRole, setSelectedRole] = useState('');
   const [formData, setFormData] = useState({
@@ -39,12 +41,12 @@ const Register = () => {
 
     // Validation
     if (formData.password !== formData.confirmPassword) {
-      setError('Les mots de passe ne correspondent pas');
+      setError(t('auth.passwordMismatch'));
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères');
+      setError(t('errors.minLength'));
       return;
     }
 
@@ -72,7 +74,7 @@ const Register = () => {
         setError(result.error);
       }
     } catch (err) {
-      setError('Une erreur est survenue lors de l\'inscription');
+      setError(t('auth.registerError'));
     } finally {
       setLoading(false);
     }
@@ -118,7 +120,7 @@ const Register = () => {
               onClick={() => handleRoleSelect('restaurant')}
             >
               <div className="role-icon">🏪</div>
-              <h2>Restaurant</h2>
+              <h2>{t('restaurant.restaurant')}</h2>
               <p>Je veux vendre mes plats</p>
               <ul className="role-features">
                 <li>✓ Gérez votre menu facilement</li>
@@ -160,7 +162,7 @@ const Register = () => {
           </button>
           <h1>
             {selectedRole === 'restaurant' ? '🏪' : '👤'} 
-            Inscription {selectedRole === 'restaurant' ? 'Restaurant' : 'Client'}
+            Inscription {selectedRole === 'restaurant' ? t('restaurant.restaurant') : 'Client'}
           </h1>
           <p>
             {selectedRole === 'restaurant' 

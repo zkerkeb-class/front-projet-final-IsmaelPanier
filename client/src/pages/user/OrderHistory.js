@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './OrderHistory.css';
@@ -6,6 +7,8 @@ import './OrderHistory.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const OrderHistory = () => {
+  const { t } = useTranslation();
+
   const { token } = useAuth();
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
@@ -196,11 +199,11 @@ const OrderHistory = () => {
         <div className="sidebar">
           <h3>Menu Client</h3>
           <ul className="sidebar-menu">
-            <li><Link to="/user/dashboard">Accueil</Link></li>
-            <li><Link to="/user/restaurants">Restaurants</Link></li>
+            <li><Link to="/user/dashboard">{t('navigation.home')}</Link></li>
+            <li><Link to="/user/restaurants">{t('restaurant.restaurants')}</Link></li>
             <li><Link to="/user/orders" className="active">Mes Commandes</Link></li>
-            <li><Link to="/user/favorites">Favoris</Link></li>
-            <li><Link to="/user/profile">Profil</Link></li>
+            <li><Link to="/user/favorites">{t('user.favorites')}</Link></li>
+            <li><Link to="/user/profile">{t('navigation.profile')}</Link></li>
           </ul>
         </div>
         <div className="content-area">
@@ -218,17 +221,17 @@ const OrderHistory = () => {
       <div className="sidebar">
         <h3>Menu Client</h3>
         <ul className="sidebar-menu">
-          <li><Link to="/user/dashboard">Accueil</Link></li>
-          <li><Link to="/user/restaurants">Restaurants</Link></li>
+          <li><Link to="/user/dashboard">{t('navigation.home')}</Link></li>
+          <li><Link to="/user/restaurants">{t('restaurant.restaurants')}</Link></li>
           <li><Link to="/user/orders" className="active">Mes Commandes</Link></li>
-          <li><Link to="/user/favorites">Favoris</Link></li>
-          <li><Link to="/user/profile">Profil</Link></li>
+          <li><Link to="/user/favorites">{t('user.favorites')}</Link></li>
+          <li><Link to="/user/profile">{t('navigation.profile')}</Link></li>
         </ul>
       </div>
 
       <div className="content-area">
         <div className="dashboard-header">
-          <h1>Historique des commandes</h1>
+          <h1>{t('order.orderHistory')}</h1>
           <p>Retrouvez toutes vos commandes passées</p>
         </div>
 
@@ -276,7 +279,7 @@ const OrderHistory = () => {
           {sortedOrders.length === 0 ? (
             <div className="no-orders">
               <div className="no-orders-icon">📋</div>
-              <h3>Aucune commande trouvée</h3>
+              <h3>{t('order.noOrders')}</h3>
               <p>
                 {searchTerm || selectedStatus || selectedPeriod !== 'all' 
                   ? 'Essayez de modifier vos critères de recherche'
@@ -300,7 +303,7 @@ const OrderHistory = () => {
                         {formatDate(order.createdAt)} à {formatTime(order.createdAt)}
                       </p>
                       <p className="order-restaurant">
-                        {order.restaurant?.name || 'Restaurant'}
+                        {order.restaurant?.name || t('restaurant.restaurant')}
                       </p>
                     </div>
                     

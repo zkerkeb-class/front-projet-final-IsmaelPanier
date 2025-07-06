@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Contact.css';
 
 const Contact = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -152,7 +155,7 @@ const Contact = () => {
                 <div className="contact-info-item">
                   <div className="contact-icon">📍</div>
                   <div className="contact-details">
-                    <h3>Adresse</h3>
+                    <h3>{t('restaurant.address')}</h3>
                     <p>123 Rue de la Livraison<br />75001 Paris, France</p>
                   </div>
                 </div>
@@ -160,7 +163,7 @@ const Contact = () => {
                 <div className="contact-info-item">
                   <div className="contact-icon">📧</div>
                   <div className="contact-details">
-                    <h4>Email</h4>
+                    <h4>{t('auth.email')}</h4>
                     <p>contact@fooddelivery-plus.com</p>
                     <p>support@fooddelivery-plus.com</p>
                   </div>
@@ -169,7 +172,7 @@ const Contact = () => {
                 <div className="contact-info-item">
                   <div className="contact-icon">📞</div>
                   <div className="contact-details">
-                    <h3>Téléphone</h3>
+                    <h3>{t('restaurant.phone')}</h3>
                     <p>+33 1 23 45 67 89</p>
                     <p>Lun-Ven: 9h-18h</p>
                   </div>

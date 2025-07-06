@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import DishModal from '../../components/common/DishModal';
 import WelcomeModal from '../../components/common/WelcomeModal';
@@ -7,6 +8,8 @@ import './RestaurantRegister.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const RestaurantRegister = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,7 +60,7 @@ const RestaurantRegister = () => {
   const steps = [
     { number: 1, label: 'Informations de base' },
     { number: 2, label: 'Horaires d\'ouverture' },
-    { number: 3, label: 'Menu' },
+    { number: 3, label: t('restaurant.menu') },
     { number: 4, label: 'Compte utilisateur' }
   ];
 
@@ -290,7 +293,7 @@ const RestaurantRegister = () => {
       </div>
 
       <div className="form-group">
-        <label htmlFor="description">Description</label>
+        <label htmlFor="description">{t('restaurant.description')}</label>
         <textarea
           id="description"
           value={formData.description}
@@ -641,7 +644,7 @@ const RestaurantRegister = () => {
         <div className="register-footer">
           <p>
             Vous avez déjà un compte ?{' '}
-            <Link to="/auth/login">Se connecter</Link>
+            <Link to="/auth/login">{t('auth.loginButton')}</Link>
           </p>
         </div>
       </div>

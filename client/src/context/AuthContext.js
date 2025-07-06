@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const AuthContext = createContext();
 
@@ -10,6 +11,8 @@ console.log('🔗 Connexion au backend établie sur:', API_BASE_URL);
 console.log('✅ Frontend prêt à communiquer avec l\'API');
 
 export const useAuth = () => {
+  const { t } = useTranslation();
+
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');

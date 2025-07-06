@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import DishDetailModal from '../../components/common/DishDetailModal';
@@ -14,6 +15,8 @@ const safeDisplayText = (value, fallback = '') => {
 };
 
 const RestaurantDetails = () => {
+  const { t } = useTranslation();
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { token } = useAuth();
@@ -181,7 +184,7 @@ const RestaurantDetails = () => {
   if (error) {
     return (
       <div className="error-page">
-        <h2>Erreur</h2>
+        <h2>{t('common.error')}</h2>
         <p>{error}</p>
         <button onClick={() => navigate('/user/dashboard')} className="uber-btn uber-btn-primary">
           Retour aux restaurants
@@ -218,7 +221,7 @@ const RestaurantDetails = () => {
               ← Retour
             </button>
             <div className={`restaurant-status ${restaurant.isOpen !== false ? 'open' : 'closed'}`}>
-              {restaurant.isOpen !== false ? 'Ouvert' : 'Fermé'}
+              {restaurant.isOpen !== false ? t('restaurant.open') : t('restaurant.closed')}
             </div>
           </div>
         </div>
@@ -229,8 +232,8 @@ const RestaurantDetails = () => {
         <div className="container">
           <div className="restaurant-header">
             <div className="restaurant-main-info">
-              <h1 className="restaurant-name">{restaurant.name || 'Restaurant'}</h1>
-              <p className="restaurant-cuisine">{restaurant.cuisine || 'Cuisine'}</p>
+              <h1 className="restaurant-name">{restaurant.name || t('restaurant.restaurant')}</h1>
+              <p className="restaurant-cuisine">{restaurant.cuisine || t('restaurant.cuisine')}</p>
               <p className="restaurant-description">{restaurant.description || 'Description du restaurant'}</p>
               
               <div className="restaurant-meta">
@@ -345,7 +348,7 @@ const RestaurantDetails = () => {
                 
                 <div className="dish-content">
                   <div className="dish-header">
-                    <h3 className="dish-name">{safeDisplayText(dish.name, 'Plat')}</h3>
+                    <h3 className="dish-name">{safeDisplayText(dish.name, t('restaurant.dish'))}</h3>
                     <span className="dish-price">{safeDisplayText(dish.price, '0')}€</span>
                   </div>
                   

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './RestaurantList.css';
@@ -6,6 +7,8 @@ import './RestaurantList.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const RestaurantList = () => {
+  const { t } = useTranslation();
+
   const { token } = useAuth();
   const [restaurants, setRestaurants] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -150,9 +153,9 @@ const RestaurantList = () => {
                 onChange={(e) => setSortBy(e.target.value)}
               >
                 <option value="recommended">Recommandé</option>
-                <option value="rating">Note</option>
-                <option value="deliveryTime">Temps de livraison</option>
-                <option value="deliveryFee">Frais de livraison</option>
+                <option value="rating">{t('restaurant.rating')}</option>
+                <option value="deliveryTime">{t('restaurant.deliveryTime')}</option>
+                <option value="deliveryFee">{t('restaurant.deliveryFee')}</option>
               </select>
             </div>
           </div>
@@ -225,7 +228,7 @@ const RestaurantList = () => {
 
                 {/* Temps de livraison */}
                 <div className="filter-section">
-                  <h4>Temps de livraison</h4>
+                  <h4>{t('restaurant.deliveryTime')}</h4>
                   <div className="time-filters">
                     <button
                       className={`time-filter ${filters.deliveryTime === 'fast' ? 'active' : ''}`}

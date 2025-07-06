@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './Notification.css';
 
 const Notification = ({ message, type = 'success', isVisible, onClose, duration = 4000 }) => {
@@ -15,6 +16,8 @@ const Notification = ({ message, type = 'success', isVisible, onClose, duration 
   if (!isVisible) return null;
 
   const getIcon = () => {
+  const { t } = useTranslation();
+
     switch (type) {
       case 'success':
         return '✅';

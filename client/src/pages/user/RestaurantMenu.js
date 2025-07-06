@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './RestaurantMenu.css';
@@ -6,6 +7,8 @@ import './RestaurantMenu.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const RestaurantMenu = () => {
+  const { t } = useTranslation();
+
   const { restaurantId } = useParams();
   const navigate = useNavigate();
   const { user, token } = useAuth();

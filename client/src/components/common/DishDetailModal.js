@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './DishDetailModal.css';
 
 const DishDetailModal = ({ dish, isOpen, onClose, onAddToCart }) => {
@@ -28,6 +29,8 @@ const DishDetailModal = ({ dish, isOpen, onClose, onAddToCart }) => {
   };
 
   const calculateTotal = () => {
+  const { t } = useTranslation();
+
     if (!dish) return 0;
     const basePrice = dish.price * quantity;
     const extrasPrice = selectedExtras.reduce((sum, extra) => sum + extra.price, 0) * quantity;
@@ -116,7 +119,7 @@ const DishDetailModal = ({ dish, isOpen, onClose, onAddToCart }) => {
           {/* Ingrédients */}
           {dish.ingredients && dish.ingredients.length > 0 && (
             <div className="dish-detail-section">
-              <h3 className="section-title">Ingrédients</h3>
+              <h3 className="section-title">{t('restaurant.ingredients')}</h3>
               <div className="ingredients-list">
                 {dish.ingredients.map((ingredient, index) => (
                   <span key={index} className="ingredient-tag">

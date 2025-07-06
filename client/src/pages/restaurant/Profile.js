@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import './Profile.css';
 
 const API_BASE_URL = 'http://localhost:5000';
 
 const RestaurantProfile = () => {
+  const { t } = useTranslation();
+
   const { token } = useAuth();
   const [restaurant, setRestaurant] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -199,7 +202,7 @@ const RestaurantProfile = () => {
     return (
       <div className="restaurant-profile-page">
         <div className="error-container">
-          <h2>Erreur</h2>
+          <h2>{t('common.error')}</h2>
           <p>{error}</p>
           <button onClick={loadRestaurantData} className="btn btn-primary">
             Réessayer
@@ -275,7 +278,7 @@ const RestaurantProfile = () => {
           </div>
 
           <div className="form-group">
-            <label>Description</label>
+            <label>{t('restaurant.description')}</label>
             <div className="editable-field">
               {editing.description ? (
                 <div className="edit-mode">
@@ -373,7 +376,7 @@ const RestaurantProfile = () => {
           <h2>Informations de contact</h2>
           
           <div className="form-group">
-            <label>Téléphone</label>
+            <label>{t('restaurant.phone')}</label>
             <div className="editable-field">
               {editing.phone ? (
                 <div className="edit-mode">
@@ -415,7 +418,7 @@ const RestaurantProfile = () => {
           </div>
 
           <div className="form-group">
-            <label>Email</label>
+            <label>{t('auth.email')}</label>
             <div className="editable-field">
               {editing.email ? (
                 <div className="edit-mode">
@@ -459,7 +462,7 @@ const RestaurantProfile = () => {
 
         {/* Adresse */}
         <div className="profile-section">
-          <h2>Adresse</h2>
+          <h2>{t('restaurant.address')}</h2>
           
           <div className="form-group">
             <label>Rue</label>

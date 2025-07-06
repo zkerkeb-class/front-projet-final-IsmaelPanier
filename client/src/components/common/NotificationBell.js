@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 import './NotificationBell.css';
 
 const API_BASE_URL = 'http://localhost:5000';
 
 const NotificationBell = () => {
+  const { t } = useTranslation();
+
   const { user, token } = useAuth();
   const [pendingOrders, setPendingOrders] = useState(0);
   const [showNotifications, setShowNotifications] = useState(false);
@@ -83,7 +86,7 @@ const NotificationBell = () => {
       {showNotifications && (
         <div className="notification-dropdown">
           <div className="notification-header">
-            <h3>Notifications</h3>
+            <h3>{t('user.notifications')}</h3>
             {pendingOrders > 0 && (
               <span className="pending-count">{pendingOrders} en attente</span>
             )}

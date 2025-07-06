@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import './Favorites.css';
 
 const Favorites = () => {
+  const { t } = useTranslation();
+
   const [activeTab, setActiveTab] = useState('restaurants');
   const [favorites, setFavorites] = useState({
     restaurants: [],

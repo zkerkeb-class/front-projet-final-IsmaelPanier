@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import './WelcomeModal.css';
 
 const WelcomeModal = ({ isOpen, onClose, restaurantName, onGoToDashboard }) => {

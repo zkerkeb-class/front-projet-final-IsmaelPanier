@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import './Cart.css';
@@ -6,6 +7,8 @@ import './Cart.css';
 const API_BASE_URL = 'http://localhost:5000';
 
 const Cart = () => {
+  const { t } = useTranslation();
+
   const { user, token } = useAuth();
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
@@ -162,7 +165,7 @@ const Cart = () => {
       <div className="cart-page">
         <div className="empty-cart">
           <div className="empty-cart-icon">🛒</div>
-          <h2>Votre panier est vide</h2>
+          <h2>{t('cart.cartEmpty')}</h2>
           <p>Ajoutez des plats délicieux à votre panier pour commencer vos achats</p>
           <button onClick={continueShopping} className="btn btn-primary">
             Découvrir les restaurants
@@ -194,8 +197,8 @@ const Cart = () => {
             return (
               <div key={restaurantId} className="restaurant-cart-section">
                 <div className="restaurant-header">
-                  <h3>{restaurant?.name || 'Restaurant'}</h3>
-                  <span className="restaurant-cuisine">{restaurant?.cuisine || 'Cuisine'}</span>
+                  <h3>{restaurant?.name || t('restaurant.restaurant')}</h3>
+                  <span className="restaurant-cuisine">{restaurant?.cuisine || t('restaurant.cuisine')}</span>
                 </div>
 
                 <div className="cart-items">
@@ -247,7 +250,7 @@ const Cart = () => {
                         <button 
                           onClick={() => removeItem(globalIndex)}
                           className="remove-btn"
-                          title="Supprimer"
+                          title=t('common.delete')
                         >
                           ✕
                         </button>
